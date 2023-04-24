@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme
           ),
           useMaterial3: false,
-
         ),
         debugShowCheckedModeBanner: false,
         getPages: RouterHelper.pageList,

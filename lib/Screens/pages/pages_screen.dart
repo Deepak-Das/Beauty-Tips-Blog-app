@@ -21,7 +21,7 @@ class PageScreen extends GetView<MyPageController> {
       body: Obx(() {
         return IndexedStack(
           index: controller.tabIndex.value,
-          children: const [
+          children:  [
             HomePage(),
             SearchPage(),
             CategoryPage(),
@@ -55,7 +55,7 @@ class PageScreen extends GetView<MyPageController> {
             onTabChange: (value) {
               controller.changePage(value);
             },// navigation bar padding
-            tabs: [
+            tabs: const [
               GButton(
                 icon: LineIcons.campground,
                 text: 'Home',
@@ -66,9 +66,8 @@ class PageScreen extends GetView<MyPageController> {
               ),
               GButton(
                 icon: LineIcons.box_open,
-                text: 'category',
+                text: 'Category',
               ),
-
               GButton(
                 icon: LineIcons.bell,
                 text: 'Notification',

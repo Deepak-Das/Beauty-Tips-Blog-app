@@ -11,12 +11,12 @@ class Ams {
   Widget topAppBar({required String title, required void Function() onPress}) {
 
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: EdgeInsets.symmetric(vertical: 15.h,horizontal:15.w),
 
       child: Card(
         elevation: 5,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,7 +48,7 @@ class Ams {
           color: color,
         );
       } else {
-        return Image.network(url!, height: height, width: width, fit: fit);
+        return Image.network(url!, height: height, width: width, fit: BoxFit.fitHeight);
       }
     } else {
       return Image.asset(url!, height: height, width: width, fit: fit);

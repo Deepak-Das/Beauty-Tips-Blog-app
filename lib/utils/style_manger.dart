@@ -9,13 +9,21 @@ TextStyle _getTextStyle(double fontSize, Color color,  double letterSpacing, Fon
    return GoogleFonts.jacquesFrancois(textStyle:TextStyle(fontSize: fontSize, color: color, letterSpacing: letterSpacing, fontWeight: fontWeight));
 }
 
+TextStyle _getTextStyle2(double fontSize, Color color,  double letterSpacing, FontWeight fontWeight,) {
+   return GoogleFonts.rubik(textStyle:TextStyle(fontSize: fontSize, color: color, letterSpacing: letterSpacing, fontWeight: fontWeight));
+}
+
 
 TextStyle getRFStyle({required Color color, required double fontSize}) {
   return _getTextStyle(fontSize,color,0.2.w,FontWeight.w400);
 }
 
 TextStyle getBFStyle({required Color color, required double fontSize}) {
-  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w400);
+  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w600);
+}
+
+TextStyle getBFStyle2({required Color color, required double fontSize}) {
+  return _getTextStyle2(fontSize, color, 0.2.w, FontWeight.w600);
 }
 
 TextStyle getMFStyle({required Color color, required double fontSize}) {
