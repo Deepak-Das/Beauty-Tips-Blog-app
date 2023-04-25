@@ -13,23 +13,22 @@ class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           // DrawerHeader(child: Ams().imageWidget("https://shorturl.at/hrsx7",width: double.infinity,height: 200.h,fit: BoxFit.fill))
           Ams().imageWidget("https://shorturl.at/hrsx7",
-              width: double.infinity, height: 200.h, fit: BoxFit.fill),
+              width: double.infinity, height: 150.h, fit: BoxFit.fill),
           SizedBox(height: 20.h),
           ListTile(
             onTap: () {},
             leading: Icon(
               LineIcons.campground,
               color: ColorManager.pink,
-              size: 30,
+              size: 25,
             ),
             title: Text(
               "Home",
-              style: getBFStyle(color: Colors.black, fontSize: 18.sp),
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
           ListTile(
@@ -37,11 +36,11 @@ class DrawerPage extends StatelessWidget {
             leading: Icon(
               Icons.save_as,
               color: ColorManager.pink,
-              size: 30,
+              size: 25,
             ),
             title: Text(
               "Save",
-              style: getBFStyle(color: Colors.black, fontSize: 18.sp),
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
           ListTile(
@@ -49,11 +48,11 @@ class DrawerPage extends StatelessWidget {
             leading: Icon(
               LineIcons.heart,
               color: ColorManager.pink,
-              size: 30,
+              size: 25,
             ),
             title: Text(
               "Liked",
-              style: getBFStyle(color: Colors.black, fontSize: 18.sp),
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
           ListTile(
@@ -61,13 +60,28 @@ class DrawerPage extends StatelessWidget {
             leading: Icon(
               LineIcons.info,
               color: ColorManager.pink,
-              size: 30,
+              size: 25,
             ),
             title: Text(
               "About",
-              style: getBFStyle(color: Colors.black, fontSize: 18.sp),
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
+          Spacer(flex: 1,),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                      )
+                  )              ),
+                onPressed: () {
+
+            }, child: TextIcon(text: "Contact Us",textStyle: getBFStyle(color: Colors.white, fontSize: 18.sp),)),
+          ),
+
         ],
       ),
     );

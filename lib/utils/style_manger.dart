@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 TextStyle _getTextStyle(double fontSize, Color color,  double letterSpacing, FontWeight fontWeight,) {
-   return GoogleFonts.jacquesFrancois(textStyle:TextStyle(fontSize: fontSize, color: color, letterSpacing: letterSpacing, fontWeight: fontWeight));
+   return GoogleFonts.rubik(textStyle:TextStyle(fontSize: fontSize, color: color, letterSpacing: letterSpacing, fontWeight: fontWeight));
 }
 
 TextStyle _getTextStyle2(double fontSize, Color color,  double letterSpacing, FontWeight fontWeight,) {
@@ -19,18 +19,18 @@ TextStyle getRFStyle({required Color color, required double fontSize}) {
 }
 
 TextStyle getBFStyle({required Color color, required double fontSize}) {
-  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w600);
+  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w700);
 }
 
-TextStyle getBFStyle2({required Color color, required double fontSize}) {
-  return _getTextStyle2(fontSize, color, 0.2.w, FontWeight.w600);
-}
+// TextStyle getBFStyle2({required Color color, required double fontSize}) {
+//   return _getTextStyle2(fontSize, color, 0.2.w, FontWeight.w600);
+// }
 
 TextStyle getMFStyle({required Color color, required double fontSize}) {
-  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w400);
+  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w500);
 }
 
 TextStyle getSFStyle({required Color color, required double fontSize,}) {
-  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w400);
+  return _getTextStyle(fontSize, color, 0.2.w, FontWeight.w600);
 }
 
