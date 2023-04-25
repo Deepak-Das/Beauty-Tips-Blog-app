@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class MyPageController extends GetxController{
 
-  var tabIndex=1.obs;
+  var tabIndex=0.obs;
 
 
 

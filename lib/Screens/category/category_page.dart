@@ -40,7 +40,6 @@ class CategoryPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
                     children: [
-
                       SizedBox(
                         height: 30.h,
                       ),
@@ -114,7 +113,8 @@ class CategoryPage extends StatelessWidget {
                         children: [
                           Text(
                             "Festival Special",
-                            style: getBFStyle(color: Colors.black, fontSize: 18.sp),
+                            style: getBFStyle(
+                                color: Colors.black, fontSize: 18.sp),
                           ),
                         ],
                       ),
@@ -263,18 +263,18 @@ class CategoryPage extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 220.w,
-                    child: ReadMoreText(
-                      trimLines: 2,
-                      trimMode: TrimMode.Line,
+                    child: Text(
+                      maxLines: 1,
                       "Ubi est varius hydra?",
+                      overflow: TextOverflow.ellipsis,
                       style: getBFStyle(
                           color: Colors.black, fontSize: FontSize.s16),
                     ),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 8.h,
                   ),
-                  SizedBox(
+                  /*SizedBox(
                     width: 220.w,
                     child: ReadMoreText(
                       trimLines: 3,
@@ -285,7 +285,15 @@ class CategoryPage extends StatelessWidget {
                       trimCollapsedText: "more...",
                       trimLength: 70,
                     ),
-                  ),
+                  ),*/
+                  SizedBox(
+                    width: 220.w,
+                    child: Text(
+                      "Instead of marinating sauce with walnut, use one container kfja dkdj  fkjd kfjfkjdkfsa j",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
                 ],
               ),
             )

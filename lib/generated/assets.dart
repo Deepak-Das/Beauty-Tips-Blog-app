@@ -22,4 +22,7 @@ class Assets {
   static const String calender = 'images/icon/calender.png';
 */
 
+  static const String bookmark_star = 'images/icons/bookmark.svg';
+
+
 }
