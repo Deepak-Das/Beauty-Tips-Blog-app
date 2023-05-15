@@ -1,6 +1,8 @@
+import 'package:beauty_tips_flutter/Screens/pages/controller/page_controller.dart';
 import 'package:beauty_tips_flutter/Screens/post/post_page.dart';
 import 'package:beauty_tips_flutter/utils/color_manger.dart';
 import 'package:beauty_tips_flutter/utils/style_manger.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,9 +14,11 @@ import '../../utils/ams.dart';
 import '../drawer_page/DrawerPage.dart';
 
 class HomePage extends StatelessWidget {
-   HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
-  var scaffoldKey=GlobalKey<ScaffoldState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final _pageController = Get.find<MyPageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,38 +28,62 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Ams().topAppBar(title: "Home", onPress: () => {
-
-              scaffoldKey.currentState!.openDrawer()
-
-            }),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(10.w),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    _timeLine(),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    _timeLine(),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    _timeLine(),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    )
-                  ],
-                ),
-              ),
-            ),
+            Ams().topAppBar(
+                title: "Home",
+                onPress: () => {scaffoldKey.currentState!.openDrawer()}),
+            StreamBuilder(
+                stream: _pageController.connectivity,
+                builder: (context, sn) {
+                  var cr = sn.data;
+                  return (cr == ConnectivityResult.wifi ||
+                          cr == ConnectivityResult.mobile)
+                      ? Expanded(
+                          child: SingleChildScrollView(
+                            padding: EdgeInsets.all(10.w),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                _timeLine(),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                _timeLine(),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                _timeLine(),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                SizedBox(
+                                  height: 20.h,
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  CupertinoIcons.cloud_bolt_rain,
+                                  color: ColorManager.pink,
+                                  size: 100.w,
+                                ),
+                                Text(
+                                  "no internet",
+                                  style: getRFStyle(
+                                      color: Colors.black, fontSize: 16.sp),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                }),
           ],
         ),
       ),
@@ -65,7 +93,7 @@ class HomePage extends StatelessWidget {
   _timeLine() {
     return GestureDetector(
       onTap: () {
-        Get.to(()=>PostPage());
+        Get.to(() => PostPage());
       },
       child: Card(
         elevation: 5,
