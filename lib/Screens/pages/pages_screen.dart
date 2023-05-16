@@ -3,6 +3,7 @@ import 'package:beauty_tips_flutter/Screens/notification/notification_page.dart'
 import 'package:beauty_tips_flutter/Screens/search/search_page.dart';
 import 'package:beauty_tips_flutter/utils/color_manger.dart';
 import 'package:beauty_tips_flutter/utils/style_manger.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,12 +13,58 @@ import 'package:nb_utils/nb_utils.dart';
 import '../category/category_page.dart';
 import 'controller/page_controller.dart';
 
-class PageScreen extends GetView<MyPageController> {
-  const PageScreen({Key? key}) : super(key: key);
+class PageScreen extends StatefulWidget {
+   PageScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PageScreen> createState() => _PageScreenState();
+}
+
+class _PageScreenState extends State<PageScreen> {
+
+  var controller=Get.put(MyPageController());
+
+  var isConnection = false;
+
+   void initState() {
+     startConnection();
+   }
+
+   checkConnection() async {
+     var checkConnectivity = await Connectivity().checkConnectivity();
+     if (checkConnectivity != ConnectivityResult.none) {
+       isConnection = true;
+     } else {
+       isConnection = false;
+       showDialogBox();
+     }
+   }
+
+   startConnection() {
+     Connectivity().onConnectivityChanged.listen((event) async {
+       checkConnection();
+     });
+   }
+
+   showDialogBox(){
+     showDialog(
+       barrierDismissible: false,
+       context: context, builder: (context) =>  CupertinoAlertDialog(
+       title: const Text("No Internet"),
+       content: const Text("Please check internet connection"),
+       actions: [
+         CupertinoButton(child: Text("Retry"), onPressed: () {
+           Navigator.pop(context);
+           checkConnection();
+         },)
+       ],
+
+     ),);
+   }
 
   @override
   Widget build(BuildContext context) {
-    
+
     return Scaffold(
       body: Obx(() {
         return IndexedStack(
@@ -79,21 +126,4 @@ class PageScreen extends GetView<MyPageController> {
       ),
     );
   }
-
-/*
-  showBanner() =>
-      ScaffoldMessenger.of(Get.context!).showMaterialBanner(MaterialBanner(
-          backgroundColor: Colors.red,
-          content: Container(
-            child: Row(
-              children: [
-                Text(
-                  "no internet connection",
-                  style: getMFStyle(color: Colors.white, fontSize: 18.sp),
-                )
-              ],
-            ),
-          ),
-          actions: [Text("data")]));
-*/
 }

@@ -1,4 +1,5 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'dart:io';
+
 import 'package:beauty_tips_flutter/utils/style_manger.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,9 +42,10 @@ class Ams {
     );
   }
 
-  Widget searchTopAppBar({required String title,
-    required void Function() onPress,
-    required void Function(String value) onSubmit}) {
+  Widget searchTopAppBar(
+      {required String title,
+      required void Function() onPress,
+      required void Function(String value) onSubmit}) {
     var flag = false.obs;
 
     return Padding(
@@ -74,12 +76,11 @@ class Ams {
                           onSubmitted: onSubmit,
                           maxLines: 1,
                           textInputAction: TextInputAction.search,
-                          decoration: InputDecoration(hintText: "search here...",
-
+                          decoration: InputDecoration(
+                            hintText: "search here...",
                           ),
-                          style: getRFStyle(
-                              color: Colors.black, fontSize: 21.sp),
-
+                          style:
+                              getRFStyle(color: Colors.black, fontSize: 21.sp),
                         ),
                       ),
                     ],
@@ -91,7 +92,7 @@ class Ams {
                 );
               }),
               Obx(() {
-                if(flag.value) return SizedBox.shrink();
+                if (flag.value) return SizedBox.shrink();
                 return GestureDetector(
                   onTap: () => flag.value = !flag.value,
                   child: SizedBox(
@@ -109,8 +110,7 @@ class Ams {
     );
   }
 
-  static ft(title) =>
-      toast(
+  static ft(title) => toast(
         title,
         bgColor: ColorManager.black,
       );
@@ -121,8 +121,7 @@ class Ams {
       if (isMobile) {
         return CachedNetworkImage(
           placeholder: (context, url) => const CircularProgressIndicator(),
-          errorWidget: (context, url, error) =>
-          const Icon(
+          errorWidget: (context, url, error) => const Icon(
             Icons.error,
           ),
           imageUrl: '$url',
@@ -135,45 +134,30 @@ class Ams {
         return Image.network(url!,
             height: height, width: width, fit: BoxFit.fitHeight);
       }
+    } else if (url!.contains("data")) {
+      return Image.file(
+        File(url!),
+        fit: fit,
+        width: width,
+        height: height,
+      );
     } else {
       return Image.asset(url!, height: height, width: width, fit: fit);
     }
   }
 
-  AwesomeDialog showError({required String msg,required BuildContext context}) {
-    return  AwesomeDialog(
-      context: context,
-      animType: AnimType.scale,
-      dialogType: DialogType.error,
-      body: Center(child: Text(
-        msg,
-        style: TextStyle(fontStyle: FontStyle.italic),
-      ),),
-      title: 'Network Issue',
-      desc:   'please enable mobile network',
-      btnOkOnPress: () {},
-    );
-  }
-
-   showDb({required BuildContext context}){
-    return showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("Alert Dialog Box"),
-        content: const Text("You have raised a Alert Dialog Box"),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: Container(
-              color: Colors.green,
-              padding: const EdgeInsets.all(14),
-              child: const Text("okay"),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+// AwesomeDialog showError({required String msg,required BuildContext context}) {
+//   return  AwesomeDialog(
+//     context: context,
+//     animType: AnimType.scale,
+//     dialogType: DialogType.error,
+//     body: Center(child: Text(
+//       msg,
+//       style: TextStyle(fontStyle: FontStyle.italic),
+//     ),),
+//     title: 'Network Issue',
+//     desc:   'please enable mobile network',
+//     btnOkOnPress: () {},
+//   );
+// }
 }

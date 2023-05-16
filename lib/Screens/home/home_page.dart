@@ -13,12 +13,55 @@ import '../../generated/assets.dart';
 import '../../utils/ams.dart';
 import '../drawer_page/DrawerPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final _pageController = Get.find<MyPageController>();
+
+  // var isConnection = false;
+  //
+  // @override
+  // void initState() {
+  //   startConnection();
+  // }
+  //
+  // checkConnection() async {
+  //   var checkConnectivity = await Connectivity().checkConnectivity();
+  //   if (checkConnectivity != ConnectivityResult.none) {
+  //     isConnection = true;
+  //   } else {
+  //     isConnection = false;
+  //     showDialogBox();
+  //   }
+  // }
+  //
+  // startConnection() {
+  //   Connectivity().onConnectivityChanged.listen((event) async {
+  //     checkConnection();
+  //   });
+  // }
+  //
+  // showDialogBox(){
+  //   showDialog(
+  //     barrierDismissible: false,
+  //     context: context, builder: (context) =>  CupertinoAlertDialog(
+  //     title: const Text("No Internet"),
+  //     content: const Text("Please check internet connection"),
+  //     actions: [
+  //       CupertinoButton(child: Text("Retry"), onPressed: () {
+  //         Navigator.pop(context);
+  //         checkConnection();
+  //       },)
+  //     ],
+  //
+  //   ),);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -31,59 +74,33 @@ class HomePage extends StatelessWidget {
             Ams().topAppBar(
                 title: "Home",
                 onPress: () => {scaffoldKey.currentState!.openDrawer()}),
-            StreamBuilder(
-                stream: _pageController.connectivity,
-                builder: (context, sn) {
-                  var cr = sn.data;
-                  return (cr == ConnectivityResult.wifi ||
-                          cr == ConnectivityResult.mobile)
-                      ? Expanded(
-                          child: SingleChildScrollView(
-                            padding: EdgeInsets.all(10.w),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                _timeLine(),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                _timeLine(),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                _timeLine(),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      : Expanded(
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  CupertinoIcons.cloud_bolt_rain,
-                                  color: ColorManager.pink,
-                                  size: 100.w,
-                                ),
-                                Text(
-                                  "no internet",
-                                  style: getRFStyle(
-                                      color: Colors.black, fontSize: 16.sp),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                }),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(10.w),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    _timeLine(),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    _timeLine(),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    _timeLine(),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

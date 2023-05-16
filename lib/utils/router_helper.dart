@@ -5,5 +5,5 @@ import '../Screens/pages/controller/page_bindig.dart';
 
 class RouterHelper{
 
-  static List<GetPage> pageList=[GetPage(name: "/", page: () => const PageScreen(),binding: PageBinding())];
+  static List<GetPage> pageList=[GetPage(name: "/", page: () =>  PageScreen(),binding: PageBinding())];
 }

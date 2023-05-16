@@ -1,7 +1,10 @@
+import 'package:beauty_tips_flutter/Screens/add_post/add_post_page.dart';
 import 'package:beauty_tips_flutter/utils/style_manger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../utils/ams.dart';
@@ -64,6 +67,20 @@ class DrawerPage extends StatelessWidget {
             ),
             title: Text(
               "About",
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Get.to(()=>AddPostPage());
+            },
+            leading: Icon(
+              LineIcons.info,
+              color: ColorManager.pink,
+              size: 25,
+            ),
+            title: Text(
+              "Post aad",
               style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
