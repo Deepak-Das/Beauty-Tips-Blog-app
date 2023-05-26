@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:beauty_tips_flutter/utils/FileObj.dart';
@@ -6,6 +7,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/ams.dart';
+import '../service/category_service.dart';
+import '../service/model/BlogPost_model.dart';
+import '../service/post_service.dart';
 
 class AddPostController extends GetxController {
   var title = "Keep your skin healthy Lorem ipsum is a text !!!".obs;
@@ -21,7 +25,15 @@ class AddPostController extends GetxController {
   var catId = "".obs;
   var date = "12-june-2023".obs;
   var img = "https://shorturl.at/hrsx7".obs;
+  bool isPublish=false;
+  FileObj? imgFile;
 
+  final _postService = Get.put(BlogPostService());
+  final _catService = Get.put(CategoryService());
+
+  setPublish(bool value) {
+    isPublish = value;
+  }
   setTitle(String value) {
     title.value = value;
   }
@@ -49,6 +61,7 @@ class AddPostController extends GetxController {
   setDate(String value) {
     date.value = value;
   }
+
   setReadTime(String value) {
     date.value = value;
   }
@@ -57,7 +70,7 @@ class AddPostController extends GetxController {
     final result = await FilePicker.platform.pickFiles(
         withData: true,
         allowMultiple: false,
-        allowedExtensions: ["pdf", "png", "jpeg", "jpg"],
+        allowedExtensions: ["png", "jpeg", "jpg"],
         type: FileType.custom);
 
     double sizeInMB = result != null ? result!.files[0].size / 1000000 : 0;
@@ -66,7 +79,7 @@ class AddPostController extends GetxController {
     var path = "";
     Uint8List? bytes;
 
-    if (result != null && sizeInMB <= 4.0) {
+    if (result != null && sizeInMB <= 1.0) {
       bytes = result.files[0].bytes;
       base64Str = base64.encode(bytes!);
       fileType = result.files[0].extension ?? "";
@@ -76,6 +89,19 @@ class AddPostController extends GetxController {
     } else if (result != null) {
       Ams.ft("file size must be under 4MB");
     }
-    return FileObj(base64Str, fileType, path, bytes);
+    return imgFile = FileObj(base64Str, fileType, path, bytes);
+  }
+
+  savePost() async {
+    await _postService.saveBlogPost(BlogPostModel(
+      title: title.value,
+      content: post.value,
+      categories: List.of([catName.value]),
+      shareCount: shareCount.value,
+      readTime: readTime.value,
+      isPublish: isPublish,
+      likeCount: likeCount.value,
+      imageFile: imgFile == null ? null : File(imgFile!.path),
+    ));
   }
 }

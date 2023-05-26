@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1096997783335",
+    "project_id": "beauty-tips-fa113",
+    "storage_bucket": "beauty-tips-fa113.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096997783335:android:494b677c7abf11cdf9cb02",
+        "android_client_info": {
+          "package_name": "com.example.beautytips"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096997783335-0mifvo07uukmbimf4fao3iau9avu4eqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp8yB5GUI_TKe7OprDNurKfhwXuJAqavI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096997783335-0mifvo07uukmbimf4fao3iau9avu4eqr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1096997783335-272gdtp4fi8vf9fopflj0q3t972d015q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.beautyTipsFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

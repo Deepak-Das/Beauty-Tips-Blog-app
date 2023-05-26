@@ -1,4 +1,5 @@
 import 'package:beauty_tips_flutter/Screens/add_post/post_input_body.dart';
+import 'package:beauty_tips_flutter/Screens/drawer_page/DrawerPage.dart';
 import 'package:beauty_tips_flutter/utils/ams.dart';
 import 'package:beauty_tips_flutter/utils/color_manger.dart';
 import 'package:beauty_tips_flutter/utils/style_manger.dart';
@@ -16,16 +17,19 @@ class AddPostPage extends StatelessWidget {
   AddPostPage({Key? key}) : super(key: key);
 
   final AddPostController _controller = Get.put(AddPostController());
+  final _scaffoldKey =GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const DrawerPage(),
       body: SafeArea(
         child: Column(
           children: [
             Ams().topAppBar(
               title: "Post",
-              onPress: () {},
+            onPress: () => {_scaffoldKey.currentState!.openDrawer()},
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -73,8 +77,8 @@ class AddPostPage extends StatelessWidget {
                         ),
                         onPressed: () async {
                           var pickFile = await _controller.pickFile();
-                          _controller.img.value = pickFile.url;
-                          print(pickFile.url.toString());
+                          _controller.img.value = pickFile.path;
+                          print(pickFile.path.toString());
                         },
                       )
                     ]),

@@ -28,6 +28,7 @@ class _PageScreenState extends State<PageScreen> {
 
    void initState() {
      startConnection();
+     checkConnection();
    }
 
    checkConnection() async {

@@ -9,6 +9,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../utils/ams.dart';
 import '../../utils/color_manger.dart';
+import '../post_preview/priview_post.dart';
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -80,7 +81,21 @@ class DrawerPage extends StatelessWidget {
               size: 25,
             ),
             title: Text(
-              "Post aad",
+              "Post Add",
+              style: getBFStyle(color: Colors.black, fontSize: 16.sp),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Get.to(()=>PreviewTab());
+            },
+            leading: Icon(
+              LineIcons.info,
+              color: ColorManager.pink,
+              size: 25,
+            ),
+            title: Text(
+              "View post",
               style: getBFStyle(color: Colors.black, fontSize: 16.sp),
             ),
           ),
